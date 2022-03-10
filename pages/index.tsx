@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import Sidebar from '../components/Sidebar'
 import { auth } from '../firebase'
 
 const Home: NextPage = () => {
@@ -8,7 +9,11 @@ const Home: NextPage = () => {
   console.log(user)
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2"></div>
+    <div>
+      <div className='fixed top-0 left-0'>
+        <Sidebar name={user?.displayName} photo={user?.photoURL} />
+      </div>
+    </div>
   )
 }
 

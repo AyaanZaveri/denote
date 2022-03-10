@@ -1,8 +1,15 @@
 import React from 'react'
 
-const Sidebar = () => {
+interface Props {
+  name: string | null | undefined
+  photo: string | null | undefined
+}
+
+const Sidebar = ({ name, photo }: Props) => {
   return (
-    <div>Sidebar</div>
+    <div className="h-screen w-60 border-r border-stone-300 bg-stone-50">
+      {name}
+    </div>
   )
 }
 
