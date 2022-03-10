@@ -10,8 +10,8 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <div className='fixed top-0 left-0'>
-        <Sidebar name={user?.displayName} photo={user?.photoURL} />
+      <div className="fixed top-0 left-0">
+        <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
     </div>
   )
