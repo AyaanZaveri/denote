@@ -10,7 +10,7 @@ interface Props {
 
 const Profile = ({ name, photoURL }: Props) => {
   return (
-    <div className="mt-4 flex h-16 w-11/12 items-center justify-between rounded-lg border bg-white">
+    <div className="mt-4 flex h-16 items-center justify-between rounded-lg border bg-white">
       <div className="inline-flex items-center gap-2">
         <img
           className="ml-3 w-8 rounded-full border border-stone-300 transition delay-200 ease-in-out hover:cursor-pointer hover:brightness-90"
