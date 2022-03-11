@@ -10,7 +10,6 @@ import {
 } from 'firebase/firestore'
 import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { useCollection } from 'react-firebase-hooks/firestore'
 import Notes from '../../components/Notes'
 import Sidebar from '../../components/Sidebar'
 import { auth, db } from '../../firebase'
@@ -34,7 +33,7 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
         <h1 className="text-3xl font-bold text-stone-800">
           {notebookInfo?.title}
         </h1>
-        <div className='mt-4'>
+        <div className="mt-4">
           <Notes notes={notesList} />
         </div>
       </div>
@@ -47,7 +46,9 @@ export async function getServerSideProps(context: any) {
 
   // Getting Note Data
 
-  const notebookRef = collection(db, `notebooks/${context.params.id}/notes`)
+  const notebookRef = query(
+    collection(db, `notebooks/${context.params.id}/notes`)
+  )
 
   const notebookNote = await getDocs(notebookRef)
 
@@ -59,8 +60,6 @@ export async function getServerSideProps(context: any) {
       id: note.id,
     })
   })
-
-  console.log(notes)
 
   // Getting Notebook Info
 
