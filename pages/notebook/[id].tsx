@@ -16,7 +16,7 @@ import Sidebar from '../../components/Sidebar'
 import { auth, db } from '../../firebase'
 
 interface ssProps {
-  notebookInfo: string
+  notebookInfo: {[key: string]: string}
   notes: string
 }
 
@@ -25,17 +25,13 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
 
   const notesList = JSON.parse(notes)
 
-  console.log(notesList)
-
-  // get the title of the notebook with useCollection
-
   return (
     <div>
       <div className="-0 fixed top-0">
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
-      <div className="ml-72">
-        <h1>Notes</h1>
+      <div className="ml-72 p-5">
+        <h1 className='text-stone-800 text-3xl font-bold'>{notebookInfo?.title}</h1>
         <Notes notes={notesList} />
       </div>
     </div>

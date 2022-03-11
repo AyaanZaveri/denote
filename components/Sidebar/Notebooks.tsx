@@ -23,7 +23,7 @@ const Notebooks = () => {
       <div className="mt-1 flex w-full flex-col">
         {value && !loading
           ? value?.docs.map((doc) => (
-              <a href={`/notebook/${doc.id}`}>
+              <a key={doc.id} href={`/notebook/${doc.id}`}>
                 <Notebook key={doc.id} title={doc.data().title} />
               </a>
             ))

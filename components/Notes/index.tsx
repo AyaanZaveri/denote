@@ -9,7 +9,7 @@ const Notes = ({ notes }: Props) => {
   return (
     <div>
       {notes.map((note: any) => {
-        return <Note key={note.id} />
+        return <Note key={note.id} title={note.title} tag={note.tag} markdown={note.markdown}  />
       })}
     </div>
   )

@@ -1,8 +1,16 @@
 import React from 'react'
 
-const Note = () => {
+interface Props {
+  title: string
+  tag: string
+  markdown: string
+}
+
+const Note = ({ title, tag, markdown }: Props) => {
   return (
-    <div>Note</div>
+    <div>
+      <span></span>
+    </div>
   )
 }
 
