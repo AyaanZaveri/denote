@@ -1,6 +1,6 @@
 import React from 'react'
 import Notebooks from './Notebooks'
-import Profile from './profile'
+import Profile from './Profile'
 
 interface Props {
   name: string
