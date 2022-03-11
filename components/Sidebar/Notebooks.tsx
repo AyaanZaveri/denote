@@ -22,7 +22,11 @@ const Notebooks = () => {
       </span>
       <div className="mt-1 flex w-full flex-col">
         {value && !loading
-          ? value?.docs.map((doc) => <Notebook title={doc.data().title} />)
+          ? value?.docs.map((doc) => (
+              <a href={`/notebook/${doc.id}`}>
+                <Notebook title={doc.data().title} />
+              </a>
+            ))
           : null}
       </div>
     </div>

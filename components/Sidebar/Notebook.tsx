@@ -10,7 +10,7 @@ const Notebook = ({ title }: { title: string }) => {
       <div>
         <CgMoreAlt
           onClick={() => setShowOptions(!showOptions)}
-          className="mr-1 hidden h-5 w-5 rounded text-stone-800 hover:bg-stone-200 group-hover:block"
+          className="mr-1 hidden h-5 w-5 rounded text-stone-600 hover:bg-stone-200 group-hover:block"
         />
       </div>
     </div>
