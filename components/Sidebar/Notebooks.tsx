@@ -1,23 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Notebook from './Notebook'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { db } from '../../firebase'
 import { collection } from 'firebase/firestore'
+import { CgSpinner } from 'react-icons/cg'
 
 const Notebooks = () => {
-  const notebookRef = useCollection(collection(db, 'notebooks'), {
+  const [value, loading, error] = useCollection(collection(db, 'notebooks'), {
     snapshotListenOptions: { includeMetadataChanges: true },
   })
+
+  console.log(value?.docs.map((doc) => doc.id))
 
   return (
     <div>
       <span className="mt-5 inline-flex items-center gap-2 text-left text-xl font-bold text-stone-800">
-        Notebooks
+        Notebooks{' '}
+        {loading ? (
+          <CgSpinner className="h-5 w-5 animate-spin text-stone-800" />
+        ) : null}
       </span>
       <div className="mt-1 flex w-full flex-col">
-        <Notebook title="🏫 School" />
-        <Notebook title="⚽️ Sports" />
-        <Notebook title="✖️ Math" />
+        {value && !loading
+          ? value?.docs.map((doc) => <Notebook title={doc.data().title} />)
+          : null}
       </div>
     </div>
   )
