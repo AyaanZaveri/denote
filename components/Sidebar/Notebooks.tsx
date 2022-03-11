@@ -10,7 +10,7 @@ const Notebooks = () => {
     snapshotListenOptions: { includeMetadataChanges: true },
   })
 
-  console.log(value?.docs.map((doc) => doc.id))
+  // console.log(value?.docs.map((doc) => doc.data()))
 
   return (
     <div>
