@@ -20,7 +20,9 @@ interface ssProps {
 const NotebookIndex = ({ notebookNote, notes, docSnap }: ssProps) => {
   const [user] = useAuthState(auth)
 
-  console.log(notebookNote)
+  const [notesList] = JSON.parse(notes)
+
+  console.log(notesList)
 
   return (
     <div>
@@ -41,14 +43,15 @@ export async function getServerSideProps(context: any) {
 
   const notebookNote = await getDocs(notebookRef)
 
+  const notes: any = []
+
   notebookNote.forEach((note) => {
-    console.log(note.data())
+    notes.push(note.data())
   })
 
   return {
     props: {
-      // notebookNote: JSON.stringify(notebookNote),
-      // notes: JSON.stringify(notes),
+      notes: JSON.stringify(notes),
     },
   }
 }
