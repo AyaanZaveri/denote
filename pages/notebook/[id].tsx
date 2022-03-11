@@ -6,6 +6,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  where,
 } from 'firebase/firestore'
 import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -26,12 +27,15 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
 
   console.log(notesList)
 
+  // get the title of the notebook with useCollection
+
   return (
     <div>
       <div className="-0 fixed top-0">
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
       <div className="ml-72">
+        <h1>Notes</h1>
         <Notes notes={notesList} />
       </div>
     </div>
@@ -60,18 +64,15 @@ export async function getServerSideProps(context: any) {
 
   // Getting Notebook Info
 
-  let notebookDetails: any = {}
+  const docRef = doc(db, 'notebooks', context.params.id)
+  const docSnap = await getDoc(docRef)
 
-  onSnapshot(doc(db, 'notebooks', context.params.id), (doc) => {
-    notebookDetails = console.log(doc.data())
-  })
-
-  console.log(notebookDetails)
+  const notebookInfo = docSnap.data()
 
   return {
     props: {
       notes: JSON.stringify(notes),
-      notebookInfo: notebookDetails,
+      notebookInfo: notebookInfo,
     },
   }
 }
