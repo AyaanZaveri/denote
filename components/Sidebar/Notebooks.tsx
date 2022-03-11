@@ -1,12 +1,21 @@
 import React, { useEffect } from 'react'
 import Notebook from './Notebook'
 import { useCollection } from 'react-firebase-hooks/firestore'
-import { db } from '../../firebase'
-import { collection } from 'firebase/firestore'
+import { auth, db } from '../../firebase'
+import { collection, query, where } from 'firebase/firestore'
 import { CgSpinner } from 'react-icons/cg'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 const Notebooks = () => {
-  const [value, loading, error] = useCollection(collection(db, 'notebooks'), {
+  const [user] = useAuthState(auth)
+
+  const notebookRef = collection(db, 'notebooks')
+
+  const notebookQuery = user
+    ? query(notebookRef, where('userID', '==', user?.uid))
+    : null
+
+  const [value, loading, error] = useCollection(notebookQuery, {
     snapshotListenOptions: { includeMetadataChanges: true },
   })
 

@@ -9,7 +9,7 @@ interface Props {
 
 const Sidebar = ({ name, photoURL }: Props) => {
   return (
-    <div className="flex h-screen w-72 border-r border-stone-300 bg-stone-50">
+    <div className="flex h-screen w-64 border-r border-stone-300 bg-stone-50">
       <div className="mx-5 flex w-full flex-col">
         <Profile name={name} photoURL={photoURL} />
         <Notebooks />

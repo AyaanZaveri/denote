@@ -8,8 +8,8 @@ interface Props {
 
 const Note = ({ title, tag, markdown }: Props) => {
   return (
-    <div>
-      <span></span>
+    <div className='bg-stone-100 border p-4 rounded-lg'>
+      <span>{title}</span>
     </div>
   )
 }

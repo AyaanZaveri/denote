@@ -16,7 +16,7 @@ import Sidebar from '../../components/Sidebar'
 import { auth, db } from '../../firebase'
 
 interface ssProps {
-  notebookInfo: {[key: string]: string}
+  notebookInfo: { [key: string]: string }
   notes: string
 }
 
@@ -30,9 +30,13 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
       <div className="-0 fixed top-0">
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
-      <div className="ml-72 p-5">
-        <h1 className='text-stone-800 text-3xl font-bold'>{notebookInfo?.title}</h1>
-        <Notes notes={notesList} />
+      <div className="ml-64 h-screen w-80 border-r border-stone-300 p-5">
+        <h1 className="text-3xl font-bold text-stone-800">
+          {notebookInfo?.title}
+        </h1>
+        <div className='mt-4'>
+          <Notes notes={notesList} />
+        </div>
       </div>
     </div>
   )
