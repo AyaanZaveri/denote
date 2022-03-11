@@ -8,6 +8,7 @@ import {
 } from 'firebase/firestore'
 import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import Notes from '../../components/Notes'
 import Sidebar from '../../components/Sidebar'
 import { auth, db } from '../../firebase'
 
@@ -17,10 +18,10 @@ interface ssProps {
   docSnap: any
 }
 
-const NotebookIndex = ({ notebookNote, notes, docSnap }: ssProps) => {
+const NotebookIndex = ({ notes }: ssProps) => {
   const [user] = useAuthState(auth)
 
-  const [notesList] = JSON.parse(notes)
+  const notesList = JSON.parse(notes)
 
   console.log(notesList)
 
@@ -30,7 +31,7 @@ const NotebookIndex = ({ notebookNote, notes, docSnap }: ssProps) => {
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
       <div className="ml-72">
-        <h1 className="text-xl">Notebook</h1>
+        <Notes notes={notesList} />
       </div>
     </div>
   )
@@ -46,8 +47,13 @@ export async function getServerSideProps(context: any) {
   const notes: any = []
 
   notebookNote.forEach((note) => {
-    notes.push(note.data())
+    notes.push({
+      ...note.data(),
+      id: note.id,
+    })
   })
+
+  console.log(notes)
 
   return {
     props: {

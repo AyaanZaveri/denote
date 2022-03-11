@@ -24,7 +24,7 @@ const Notebooks = () => {
         {value && !loading
           ? value?.docs.map((doc) => (
               <a href={`/notebook/${doc.id}`}>
-                <Notebook title={doc.data().title} />
+                <Notebook key={doc.id} title={doc.data().title} />
               </a>
             ))
           : null}
