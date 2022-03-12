@@ -66,7 +66,7 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
           />
         </h1>
         <div className="mt-4">
-          <Notes notes={notesList} />
+          <Notes notes={notesList} notebookInfo={notebookInfo} />
         </div>
       </div>
     </div>
@@ -98,7 +98,10 @@ export async function getServerSideProps(context: any) {
   const docRef = doc(db, 'notebooks', context.params.id)
   const docSnap = await getDoc(docRef)
 
-  const notebookInfo = docSnap.data()
+  const notebookInfo = {
+    ...docSnap.data(),
+    id: docSnap.id,
+  }
 
   return {
     props: {

@@ -3,9 +3,10 @@ import Note from './Note'
 
 interface Props {
   notes: { [key: string]: any }
+  notebookInfo: { [key: string]: string }
 }
 
-const Notes = ({ notes }: Props) => {
+const Notes = ({ notes, notebookInfo }: Props) => {
   return (
     <div className="flex flex-col gap-3">
       {notes.length > 0 ? (
@@ -18,11 +19,14 @@ const Notes = ({ notes }: Props) => {
               timestamp={note.timestamp}
               tag={note.tag}
               markdown={note.markdown}
+              notebookID={notebookInfo?.id}
             />
           )
         })
       ) : (
-        <div className="text-center text-stone-500">There are no notes yet...</div>
+        <div className="text-center text-stone-500">
+          There are no notes yet...
+        </div>
       )}
     </div>
   )
