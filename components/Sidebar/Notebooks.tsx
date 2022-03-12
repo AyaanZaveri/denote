@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import Notebook from './Notebook'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { auth, db } from '../../firebase'
-import { collection, query, where } from 'firebase/firestore'
+import { addDoc, collection, query, setDoc, where } from 'firebase/firestore'
 import { CgSpinner } from 'react-icons/cg'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { HiOutlinePlusSm } from 'react-icons/hi'
 
 const Notebooks = () => {
   const [user] = useAuthState(auth)
@@ -19,6 +20,15 @@ const Notebooks = () => {
     snapshotListenOptions: { includeMetadataChanges: true },
   })
 
+  const addNotebook = async () => {
+    const title = prompt('Enter a title for your notebook.')
+
+    await addDoc(collection(db, 'notebooks'), {
+      title: title,
+      userID: user?.uid,
+    })
+  }
+
   // console.log(value?.docs.map((doc) => doc.data()))
 
   return (
@@ -27,7 +37,12 @@ const Notebooks = () => {
         Notebooks{' '}
         {loading ? (
           <CgSpinner className="h-5 w-5 animate-spin text-stone-800" />
-        ) : null}
+        ) : (
+          <HiOutlinePlusSm
+            onClick={addNotebook}
+            className="h-5 w-5 rounded border border-stone-300 transition delay-200 ease-in-out hover:cursor-pointer hover:bg-stone-200"
+          />
+        )}
       </span>
       <div className="mt-1 flex w-full flex-col">
         {value && !loading

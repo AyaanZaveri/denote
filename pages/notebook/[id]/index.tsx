@@ -62,7 +62,7 @@ const NotebookIndex = ({ notes }: ssProps) => {
     const title = prompt('Enter a title for your note.')
 
     const newNote = {
-      title: title,
+      title: title ? title : 'Untitled Note',
       markdown: '',
       timestamp: serverTimestamp(),
     }
