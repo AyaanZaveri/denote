@@ -1,0 +1,47 @@
+.EasyMDEContainer .editor-toolbar {
+  font-size: 1rem;
+  border: 0;
+  padding-left: 0;
+  padding-right: 0;
+  position: sticky;
+  top: 4rem;
+  z-index: 5;
+  background-color: white;
+}
+
+.EasyMDEContainer div.CodeMirror {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace; /* font-mono */
+  border: 0;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: inherit;
+  width: calc(100vw - 12px);
+}
+
+.EasyMDEContainer .CodeMirror-scroll {
+  width: 50%;
+}
+
+.EasyMDEContainer div.editor-statusbar {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace; /* font-mono */
+  position: fixed;
+  z-index: 50;
+  bottom: 0;
+  right: 0;
+  width: 100vw;
+  color: #0c4a6e; /* sky 400 */
+  background-color: #e0f2fe; /* sky 100 */
+  border-top: 1px solid rgb(156, 163, 175);
+
+  /* transition */
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.EasyMDEContainer div.editor-statusbar:hover {
+  background-color: #bae6fd; /* sky 200 */
+}

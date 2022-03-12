@@ -68,9 +68,9 @@ const NoteID = () => {
           }}
           className="inline-flex items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-stone-800 outline-none hover:bg-stone-50 focus:bg-stone-100"
         />
-        <div>
+        <div className='w-full'>
           <SimplMDE
-            className={`flex justify-start p-3 outline-none transition`}
+            className={`flex justify-start p-3 outline-none transition w-72`}
             onChange={(e) => setNoteData({ ...noteData, markdown: e })}
             options={{
               autofocus: true,
