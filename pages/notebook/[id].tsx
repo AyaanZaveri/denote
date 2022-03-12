@@ -7,8 +7,10 @@ import {
   onSnapshot,
   orderBy,
   query,
+  setDoc,
   where,
 } from 'firebase/firestore'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { HiOutlineDocumentAdd } from 'react-icons/hi'
@@ -26,6 +28,21 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
 
   const notesList = JSON.parse(notes)
 
+  const router = useRouter()
+
+  const queryID = router.query.id
+
+  const addDoc = () => {
+    const newNote = {
+      title: 'Hi',
+      tag: 'Hi',
+      markdown: 'Hello',
+    }
+    setDoc(doc(collection(db, `notebooks/${queryID}/notes`)), newNote, {
+      merge: true,
+    })
+  }
+
   return (
     <div>
       <div className="fixed left-0 top-0">
@@ -34,7 +51,10 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
       <div className="ml-64 h-screen w-80 border-r border-stone-300 p-5">
         <h1 className="inline-flex w-full items-center justify-between text-3xl font-bold text-stone-800">
           {notebookInfo?.title}
-          <HiOutlineDocumentAdd className="w-8 h-8 hover:bg-stone-100 hover:ring-1 hover:ring-stone-300 p-1 rounded transition ease-in-out hover:cursor-pointer" />
+          <HiOutlineDocumentAdd
+            onClick={addDoc}
+            className="h-8 w-8 rounded p-1 transition ease-in-out hover:cursor-pointer hover:bg-stone-100 hover:ring-1 hover:ring-stone-300"
+          />
         </h1>
         <div className="mt-4">
           <Notes notes={notesList} />
@@ -70,6 +90,8 @@ export async function getServerSideProps(context: any) {
   const docSnap = await getDoc(docRef)
 
   const notebookInfo = docSnap.data()
+
+
 
   return {
     props: {
