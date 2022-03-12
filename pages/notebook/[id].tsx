@@ -11,7 +11,7 @@ import {
   where,
 } from 'firebase/firestore'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { HiOutlineDocumentAdd } from 'react-icons/hi'
 import Notes from '../../components/Notes'
@@ -24,9 +24,9 @@ interface ssProps {
 }
 
 const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
-  const [user] = useAuthState(auth)
+  const [notesList, setNotesList] = useState(JSON.parse(notes))
 
-  const notesList = JSON.parse(notes)
+  const [user] = useAuthState(auth)
 
   const router = useRouter()
 
@@ -41,7 +41,15 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
     setDoc(doc(collection(db, `notebooks/${queryID}/notes`)), newNote, {
       merge: true,
     })
+
+    const query = collection(db, `notebooks/${queryID}/notes`)
+
+    onSnapshot(query, (snapshot) => {
+      snapshot.docs.map((doc) => setNotesList([...notesList, doc.data()]))
+    })
   }
+
+  // refresh the data when a new note is added
 
   return (
     <div>
@@ -56,9 +64,7 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
             className="h-8 w-8 rounded p-1 transition ease-in-out hover:cursor-pointer hover:bg-stone-100 hover:ring-1 hover:ring-stone-300"
           />
         </h1>
-        <div className="mt-4">
-          <Notes notes={notesList} />
-        </div>
+        <div className="mt-4">{/* <Notes notes={notesList} /> */}</div>
       </div>
     </div>
   )
@@ -90,8 +96,6 @@ export async function getServerSideProps(context: any) {
   const docSnap = await getDoc(docRef)
 
   const notebookInfo = docSnap.data()
-
-
 
   return {
     props: {
