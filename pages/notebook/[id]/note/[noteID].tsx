@@ -1,4 +1,4 @@
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import NotebookIndex from '..'
@@ -31,11 +31,22 @@ const NoteID = () => {
     }
   }
 
+  const updateDoc = async () => {
+    const docRef = doc(db, `notebooks/${id}/notes`, `${noteID}`)
+    const docSnap = await getDoc(docRef)
+
+    setDoc(docRef, noteData)
+  }
+
   useEffect(() => {
     getDocData()
   }, [])
 
-  console.log(title)
+  console.log(noteData)
+
+  useEffect(() => {
+    updateDoc()
+  }, [noteData])
 
   return (
     <div>
@@ -43,10 +54,10 @@ const NoteID = () => {
       <div className="ml-[36rem] p-5 pb-8">
         <input
           defaultValue={title}
-          onChange={() => {
+          onChange={(e) => {
             setNoteData({
               ...noteData,
-              title: title,
+              title: e.target.value,
             })
           }}
           className="inline-flex items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-stone-800 outline-none hover:bg-stone-50 focus:bg-stone-100"
