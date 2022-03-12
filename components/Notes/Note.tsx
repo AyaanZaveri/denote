@@ -37,7 +37,7 @@ const Note = ({ id, timestamp, title, tag, markdown, notebookID }: Props) => {
           <div className="flex flex-col">
             <span className="font-semibold text-stone-800">{title}</span>
             <span className="text-sm text-stone-500">
-              {convertTime(seconds)}
+              {convertTime(seconds ? seconds : 0)}
             </span>
           </div>
           <span className="absolute top-0 right-0 m-1 text-[12px]"></span>

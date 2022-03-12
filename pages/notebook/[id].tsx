@@ -27,11 +27,23 @@ interface ssProps {
 const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
   const [notesList, setNotesList] = useState(JSON.parse(notes))
 
+  console.log(notesList)
+
   const [user] = useAuthState(auth)
 
   const router = useRouter()
 
   const queryID = router.query.id
+
+  // Refresh Data
+
+  const query = collection(db, `notebooks/${queryID}/notes`)
+
+  const refreshData = () => {
+    onSnapshot(query, (snapshot) => {
+      snapshot.docs.map((doc) => setNotesList([...notesList, doc.data()]))
+    })
+  }
 
   const addDoc = () => {
     const title = prompt('Enter a title for your note.')
@@ -45,12 +57,12 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
       merge: true,
     })
 
-    const query = collection(db, `notebooks/${queryID}/notes`)
-
-    onSnapshot(query, (snapshot) => {
-      snapshot.docs.map((doc) => setNotesList([...notesList, doc.data()]))
-    })
+    refreshData()
   }
+
+  useEffect(() => {
+    refreshData()
+  }, [])
 
   return (
     <div>

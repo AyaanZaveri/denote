@@ -7,6 +7,7 @@ interface Props {
 }
 
 const Notes = ({ notes, notebookInfo }: Props) => {
+
   return (
     <div className="flex flex-col gap-3">
       {notes.length > 0 ? (
