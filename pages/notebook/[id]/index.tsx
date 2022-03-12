@@ -16,25 +16,47 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { HiOutlineDocumentAdd } from 'react-icons/hi'
-import Notes from '../../components/Notes'
-import Sidebar from '../../components/Sidebar'
-import { auth, db } from '../../firebase'
+import Notes from '../../../components/Notes'
+import Sidebar from '../../../components/Sidebar'
+import { auth, db } from '../../../firebase'
 
 interface ssProps {
-  notebookInfo: { [key: string]: string }
-  notes: string
+  notes?: string
 }
 
-const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
+const NotebookIndex = ({ notes }: ssProps) => {
   const [notesList, setNotesList] = useState(
-    notes.length > 0 ? JSON.parse(notes) : []
+    notes?.length! > 0 ? JSON.parse(notes!) : []
   )
+
+  const [notebookInfo, setNotebookInfo] = useState<any>({
+    id: '',
+    title: '',
+  })
 
   const [user] = useAuthState(auth)
 
   const router = useRouter()
 
   const queryID = router.query.id
+
+  // Getting Notebook Info
+
+  const getNotebookInfo = async () => {
+    const docRef = await doc(db, 'notebooks', `${queryID}`)
+    const docSnap = await getDoc(docRef)
+
+    setNotebookInfo({
+      ...docSnap.data(),
+      id: docSnap.id,
+    })
+  }
+
+  useEffect(() => {
+    getNotebookInfo()
+  }, [])
+
+  console.log(notebookInfo)
 
   const addADoc = async () => {
     const title = prompt('Enter a title for your note.')
@@ -50,8 +72,6 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
       merge: true,
     })
   }
-
-  console.log(notesList)
 
   useEffect(() => {
     // Retrieves the notes for the current notebook (${queryID})
@@ -86,7 +106,7 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
           />
         </h1>
         <div className="mt-4">
-          <Notes notes={notesList} notebookInfo={notebookInfo} />
+          <Notes notes={notesList} notebookInfo={notebookInfo!} />
         </div>
       </div>
     </div>
@@ -113,20 +133,9 @@ export async function getServerSideProps(context: any) {
     })
   })
 
-  // Getting Notebook Info
-
-  const docRef = doc(db, 'notebooks', context.params.id)
-  const docSnap = await getDoc(docRef)
-
-  const notebookInfo = {
-    ...docSnap.data(),
-    id: docSnap.id,
-  }
-
   return {
     props: {
       notes: JSON.stringify(notes),
-      notebookInfo: notebookInfo,
     },
   }
 }
