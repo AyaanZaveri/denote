@@ -3,6 +3,12 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import NotebookIndex from '..'
 import { db } from '../../../../firebase'
+import 'easymde/dist/easymde.min.css'
+import dynamic from 'next/dynamic'
+
+const SimplMDE = dynamic(() => import('react-simplemde-editor'), {
+  ssr: false,
+})
 
 const NoteID = () => {
   const router = useRouter()
@@ -62,16 +68,19 @@ const NoteID = () => {
           }}
           className="inline-flex items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-stone-800 outline-none hover:bg-stone-50 focus:bg-stone-100"
         />
-        <textarea
-          defaultValue={markdown}
-          onChange={(e) => {
-            setNoteData({
-              ...noteData,
-              markdown: e.target.value,
-            })
-          }}
-          className="h-64 w-full rounded-lg p-1.5 font-bold text-stone-800 outline-none hover:bg-stone-50 focus:bg-stone-100"
-        />
+        <div>
+          <SimplMDE
+            className={`flex justify-start p-3 outline-none transition`}
+            onChange={(e) => setNoteData({ ...noteData, markdown: e })}
+            options={{
+              autofocus: true,
+              spellChecker: false,
+              placeholder: 'Write your note here...',
+              toolbar: [],
+            }}
+            value={markdown}
+          />
+        </div>
       </div>
     </div>
   )
