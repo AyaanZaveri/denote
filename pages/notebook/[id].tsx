@@ -7,6 +7,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  serverTimestamp,
   setDoc,
   where,
 } from 'firebase/firestore'
@@ -37,6 +38,7 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
       title: 'Hi',
       tag: 'Hi',
       markdown: 'Hello',
+      timestamp: serverTimestamp(),
     }
     setDoc(doc(collection(db, `notebooks/${queryID}/notes`)), newNote, {
       merge: true,
@@ -56,7 +58,7 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
       <div className="fixed left-0 top-0">
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
-      <div className="ml-64 pb-8 h-screen w-80 border-r border-stone-300 p-5">
+      <div className="ml-64 h-screen w-80 border-r border-stone-300 p-5 pb-8">
         <h1 className="inline-flex w-full items-center justify-between text-3xl font-bold text-stone-800">
           {notebookInfo?.title}
           <HiOutlineDocumentAdd
@@ -64,7 +66,9 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
             className="h-8 w-8 rounded p-1 transition ease-in-out hover:cursor-pointer hover:bg-stone-100 hover:ring-1 hover:ring-stone-300"
           />
         </h1>
-        <div className="mt-4"><Notes notes={notesList} /></div>
+        <div className="mt-4">
+          <Notes notes={notesList} />
+        </div>
       </div>
     </div>
   )
