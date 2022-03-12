@@ -10,9 +10,9 @@ interface Props {
 }
 
 const variants: { [key: string]: string } = {
-  ring: 'inline-flex items-center rounded-md border border-stone-200 bg-white px-3 py-2 text-stone-600 shadow-sm transition ease-in-out hover:bg-stone-50 focus:border-sky-500 focus:outline-none focus:ring focus:ring-sky-200 active:bg-sky-100',
+  ring: 'inline-flex items-center rounded-md border border-stone-200 bg-white px-3 py-2 text-stone-600 shadow-sm transition ease-in-out hover:bg-stone-50 focus:border-rose-500 focus:outline-none focus:ring focus:ring-rose-200 active:bg-rose-100',
   ringDark:
-    'inline-flex items-center rounded-md border border-stone-200 px-3 py-2 text-stone-600 shadow-xl transition ease-in-out focus:border-sky-700 focus:outline-none focus:ring focus:ring-sky-300 active:bg-stone-900 border-stone-600 bg-stone-700 text-white hover:bg-stone-800',
+    'inline-flex items-center rounded-md border border-stone-200 px-3 py-2 text-stone-600 shadow-xl transition ease-in-out focus:border-rose-700 focus:outline-none focus:ring focus:ring-rose-300 active:bg-stone-900 border-stone-600 bg-stone-700 text-white hover:bg-stone-800',
 }
 
 const Button = ({ children, variant, icon, solid = false, onClick }: Props) => {

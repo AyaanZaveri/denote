@@ -20,7 +20,7 @@ const Profile = ({ name, photoURL }: Props) => {
         />
         <span className="font-semibold text-stone-800">{name}</span>
       </div>
-      <HiChevronDown className="mr-3 inline-flex h-6 w-6 text-stone-800 transition delay-200 ease-in-out hover:cursor-pointer hover:text-sky-500" />
+      <HiChevronDown className="mr-3 inline-flex h-6 w-6 text-stone-800 transition delay-200 ease-in-out hover:cursor-pointer hover:text-rose-500" />
     </div>
   )
 }

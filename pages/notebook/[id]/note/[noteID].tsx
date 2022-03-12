@@ -72,7 +72,7 @@ const NoteID = () => {
               markdown: e.target.value,
             })
           }}
-          className="h-full w-full resize-none overflow-hidden rounded-lg p-1.5 text-stone-800 outline-none"
+          className="w-full mt-5 resize-none overflow-hidden rounded-lg p-1.5 text-stone-800 outline-none"
         />
       </div>
     </div>

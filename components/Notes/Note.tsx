@@ -31,7 +31,7 @@ const Note = ({ id, timestamp, title, tag, markdown, notebookID }: Props) => {
 
   return (
     <div>
-      <div className="relative cursor-pointer rounded-lg bg-stone-100 p-3 ring-1 ring-stone-300 transition ease-in-out hover:ring-2 hover:ring-stone-400">
+      <div className="relative cursor-pointer rounded-lg bg-stone-100 p-3 ring-1 ring-stone-300 transition ease-in-out hover:ring-rose-500 hover:ring-2">
         <div className="flex flex-col">
           <a href={`/notebook/${notebookID}/note/${id}`}>
             <span className="font-semibold text-stone-800 transition delay-200 ease-in-out hover:underline">

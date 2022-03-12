@@ -6,7 +6,7 @@ const Loading = () => {
     <div className="flex h-screen">
       <div className="m-auto">
         <div>
-          <CgSpinner className="h-8 w-8 animate-spin text-sky-500" />
+          <CgSpinner className="h-8 w-8 animate-spin text-rose-500" />
         </div>
       </div>
     </div>

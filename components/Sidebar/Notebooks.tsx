@@ -40,7 +40,7 @@ const Notebooks = () => {
         ) : (
           <HiOutlinePlusSm
             onClick={addNotebook}
-            className="h-5 w-5 rounded border border-stone-300 transition delay-200 ease-in-out hover:cursor-pointer hover:bg-stone-200"
+            className="h-5 w-5 rounded border border-stone-300 transition delay-200 ease-in-out hover:cursor-pointer hover:text-rose-500"
           />
         )}
       </span>
