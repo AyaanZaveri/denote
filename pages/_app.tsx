@@ -21,6 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           photoURL: user.photoURL,
           email: user.email,
           lastSeen: serverTimestamp(),
+          uid: user.uid,
         },
         { merge: true }
       )

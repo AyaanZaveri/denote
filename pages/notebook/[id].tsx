@@ -27,7 +27,7 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
 
   return (
     <div>
-      <div className="-0 fixed top-0">
+      <div className="fixed left-0 top-0">
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
       <div className="ml-64 h-screen w-80 border-r border-stone-300 p-5">
