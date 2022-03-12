@@ -1,3 +1,4 @@
+import { getAuth } from 'firebase/auth'
 import {
   collection,
   doc,

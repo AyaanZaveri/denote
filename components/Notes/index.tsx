@@ -7,9 +7,17 @@ interface Props {
 
 const Notes = ({ notes }: Props) => {
   return (
-    <div className='flex flex-col gap-3'>
+    <div className="flex flex-col gap-3">
       {notes.map((note: any) => {
-        return <Note key={note.id} title={note.title} tag={note.tag} markdown={note.markdown}  />
+        return (
+          <Note
+            key={note.id}
+            id={note.id}
+            title={note.title}
+            tag={note.tag}
+            markdown={note.markdown}
+          />
+        )
       })}
     </div>
   )
