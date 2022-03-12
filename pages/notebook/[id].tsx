@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore'
 import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { HiOutlineDocumentAdd } from 'react-icons/hi'
 import Notes from '../../components/Notes'
 import Sidebar from '../../components/Sidebar'
 import { auth, db } from '../../firebase'
@@ -31,8 +32,9 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
       <div className="ml-64 h-screen w-80 border-r border-stone-300 p-5">
-        <h1 className="text-3xl font-bold text-stone-800">
+        <h1 className="inline-flex w-full items-center justify-between text-3xl font-bold text-stone-800">
           {notebookInfo?.title}
+          <HiOutlineDocumentAdd className="w-8 h-8 hover:bg-stone-100 hover:ring-1 hover:ring-stone-300 p-1 rounded transition ease-in-out hover:cursor-pointer" />
         </h1>
         <div className="mt-4">
           <Notes notes={notesList} />
