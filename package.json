@@ -16,7 +16,8 @@
     "react-firebase-hooks": "^5.0.3",
     "react-icons": "^4.3.1",
     "react-markdown": "^8.0.0",
-    "react-simplemde-editor": "^5.0.2"
+    "react-simplemde-editor": "^5.0.2",
+    "react-textarea-autosize": "^8.3.3"
   },
   "devDependencies": {
     "@types/luxon": "^2.3.0",
