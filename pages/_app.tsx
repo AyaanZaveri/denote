@@ -5,6 +5,7 @@ import { auth, db } from '../firebase'
 import { collection, doc, serverTimestamp, setDoc } from 'firebase/firestore'
 import { useEffect } from 'react'
 import Login from './login'
+import Loading from '../components/Loading'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [user, loading] = useAuthState(auth)
