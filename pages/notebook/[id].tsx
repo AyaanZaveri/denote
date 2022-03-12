@@ -34,10 +34,11 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
   const queryID = router.query.id
 
   const addDoc = () => {
+    const title = prompt('Enter a title for your note.')
+
     const newNote = {
-      title: 'Hi',
-      tag: 'Hi',
-      markdown: 'Hello',
+      title: title,
+      markdown: '',
       timestamp: serverTimestamp(),
     }
     setDoc(doc(collection(db, `notebooks/${queryID}/notes`)), newNote, {
@@ -50,8 +51,6 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
       snapshot.docs.map((doc) => setNotesList([...notesList, doc.data()]))
     })
   }
-
-  // refresh the data when a new note is added
 
   return (
     <div>

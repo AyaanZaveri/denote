@@ -15,6 +15,7 @@ const Notes = ({ notes }: Props) => {
               key={note.id}
               id={note.id}
               title={note.title}
+              timestamp={note.timestamp}
               tag={note.tag}
               markdown={note.markdown}
             />
