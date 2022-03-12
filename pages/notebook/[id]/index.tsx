@@ -97,12 +97,12 @@ const NotebookIndex = ({ notes }: ssProps) => {
       <div className="fixed left-0 top-0">
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
-      <div className="scrollbar fixed top-0 bottom-0 ml-64 h-full w-80 overflow-y-scroll border-r border-stone-300 p-5 pb-8">
-        <h1 className="inline-flex w-full items-center justify-between pt-1.5 text-3xl font-bold text-stone-800">
+      <div className="scrollbar fixed top-0 bottom-0 ml-64 h-full w-80 overflow-y-scroll border-r border-gray-300 p-5 pb-8">
+        <h1 className="inline-flex w-full items-center justify-between pt-1.5 text-3xl font-bold text-gray-800">
           {notebookInfo?.title}
           <HiOutlineDocumentAdd
             onClick={addADoc}
-            className="h-8 w-8 rounded p-1 transition ease-in-out delay-200 hover:cursor-pointer bg-stone-100 ring-1 ring-stone-300 hover:text-rose-500"
+            className="h-7 w-7 rounded bg-gray-100 p-1 ring-1 ring-gray-300 transition delay-200 ease-in-out hover:cursor-pointer hover:ring-rose-500 hover:bg-rose-500 hover:text-gray-50"
           />
         </h1>
         <div className="mt-4">

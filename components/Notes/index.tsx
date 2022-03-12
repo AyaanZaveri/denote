@@ -25,7 +25,7 @@ const Notes = ({ notes, notebookInfo }: Props) => {
           )
         })
       ) : (
-        <div className="text-center text-stone-500">
+        <div className="text-center text-gray-500">
           There are no notes yet...
         </div>
       )}

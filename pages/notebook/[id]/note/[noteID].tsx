@@ -61,7 +61,7 @@ const NoteID = () => {
               title: e.target.value,
             })
           }}
-          className="inline-flex items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-stone-800 outline-none hover:bg-stone-50 focus:bg-stone-100"
+          className="inline-flex items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-gray-800 outline-none hover:bg-gray-50 focus:bg-gray-100"
         />
         {/* Make an autoresize text-area */}
         <TextareaAutosize
@@ -72,7 +72,7 @@ const NoteID = () => {
               markdown: e.target.value,
             })
           }}
-          className="w-full mt-5 resize-none overflow-hidden rounded-lg p-1.5 text-stone-800 outline-none"
+          className="w-full mt-5 resize-none overflow-hidden rounded-lg p-1.5 text-gray-800 outline-none"
         />
       </div>
     </div>

@@ -13,14 +13,14 @@ const Profile = ({ name, photoURL }: Props) => {
     <div className="mt-4 flex h-16 items-center justify-between rounded-lg border bg-white">
       <div className="inline-flex items-center gap-2">
         <img
-          className="ml-3 w-8 rounded-full border border-stone-300 transition delay-200 ease-in-out hover:cursor-pointer hover:brightness-90"
+          className="ml-3 w-8 rounded-full border border-gray-300 transition delay-200 ease-in-out hover:cursor-pointer hover:brightness-90"
           src={photoURL}
           alt=""
           onClick={() => signOut(auth)}
         />
-        <span className="font-semibold text-stone-800">{name}</span>
+        <span className="font-semibold text-gray-800">{name}</span>
       </div>
-      <HiChevronDown className="mr-3 inline-flex h-6 w-6 text-stone-800 transition delay-200 ease-in-out hover:cursor-pointer hover:text-rose-500" />
+      <HiChevronDown className="mr-3 inline-flex h-6 w-6 text-gray-800 transition delay-200 ease-in-out hover:cursor-pointer hover:text-rose-500" />
     </div>
   )
 }

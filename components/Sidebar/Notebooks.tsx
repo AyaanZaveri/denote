@@ -24,7 +24,7 @@ const Notebooks = () => {
     const title = prompt('Enter a title for your notebook.')
 
     await addDoc(collection(db, 'notebooks'), {
-      title: title,
+      title: title ? title : 'Untitled Notebook',
       userID: user?.uid,
     })
   }
@@ -33,14 +33,14 @@ const Notebooks = () => {
 
   return (
     <div>
-      <span className="mt-5 inline-flex items-center gap-2 text-left text-xl font-bold text-stone-800">
+      <span className="mt-5 inline-flex items-center gap-2 text-left text-xl font-bold text-gray-800">
         Notebooks{' '}
         {loading ? (
-          <CgSpinner className="h-5 w-5 animate-spin text-stone-800" />
+          <CgSpinner className="h-5 w-5 animate-spin text-gray-800" />
         ) : (
           <HiOutlinePlusSm
             onClick={addNotebook}
-            className="h-5 w-5 rounded border border-stone-300 transition delay-200 ease-in-out hover:cursor-pointer hover:text-rose-500"
+            className="h-5 w-5 rounded border border-gray-300 transition delay-200 ease-in-out hover:cursor-pointer hover:border-rose-500 hover:bg-rose-500 hover:text-gray-50"
           />
         )}
       </span>
