@@ -7,6 +7,7 @@ interface Props {
 }
 
 const Notes = ({ notes, notebookInfo }: Props) => {
+  console.log(notes)
 
   return (
     <div className="flex flex-col gap-3">

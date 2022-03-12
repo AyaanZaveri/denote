@@ -54,15 +54,18 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
   console.log(notesList)
 
   useEffect(() => {
-    // retrieve the notes for the current notebook
+    // Retrieves the notes for the current notebook (${queryID})
     const notesRef = collection(db, `notebooks/${queryID}/notes`)
 
-    // listen for changes to the notes
+    // Listens for changes to the notes collection
     onSnapshot(notesRef, (snapshot) => {
       const notesArr: any = []
 
       snapshot.forEach((doc) => {
-        notesArr.push(doc.data())
+        notesArr.push({
+          ...doc.data(),
+          id: doc.id,
+        })
       })
 
       setNotesList(notesArr)
@@ -74,7 +77,7 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
       <div className="fixed left-0 top-0">
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
-      <div className="ml-64 h-screen w-80 border-r border-stone-300 p-5 pb-8">
+      <div className="scrollbar fixed top-0 bottom-0 ml-64 h-full w-80 overflow-y-scroll border-r border-stone-300 p-5 pb-8">
         <h1 className="inline-flex w-full items-center justify-between text-3xl font-bold text-stone-800">
           {notebookInfo?.title}
           <HiOutlineDocumentAdd
