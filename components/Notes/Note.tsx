@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import luxon, { DateTime } from 'luxon'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { collection, deleteDoc, doc } from 'firebase/firestore'
@@ -15,7 +15,14 @@ interface Props {
   notebookID: string
 }
 
-const Note = ({ id, timestamp, title, tag, markdown, notebookID }: Props) => {
+const Note = ({
+  id,
+  timestamp,
+  title,
+  tag,
+  markdown,
+  notebookID,
+}: Props) => {
   const seconds = timestamp?.seconds
 
   const convertTime = (unixTime: number) => {
@@ -29,9 +36,9 @@ const Note = ({ id, timestamp, title, tag, markdown, notebookID }: Props) => {
 
   return (
     <div>
-      <button onClick={removeDoc}>
+      {/* <button onClick={removeDoc}>
         <HiOutlineTrash className="h-4 w-4 rounded-full text-stone-800 transition delay-200 ease-in-out hover:text-rose-600" />
-      </button>
+      </button> */}
       <a href={`/note/${id}`}>
         <div className="relative cursor-pointer rounded-lg border border-stone-300 bg-stone-100 p-3 transition ease-in-out hover:border-stone-400">
           <div className="flex flex-col">

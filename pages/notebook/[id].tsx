@@ -1,3 +1,4 @@
+import { RefreshIcon } from '@heroicons/react/solid'
 import { getAuth } from 'firebase/auth'
 import {
   collection,
@@ -25,9 +26,9 @@ interface ssProps {
 }
 
 const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
-  const [notesList, setNotesList] = useState(JSON.parse(notes))
-
-  console.log(notesList)
+  const [notesList, setNotesList] = useState(
+    notes.length > 0 ? JSON.parse(notes) : []
+  )
 
   const [user] = useAuthState(auth)
 
@@ -35,17 +36,7 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
 
   const queryID = router.query.id
 
-  // Refresh Data
-
-  const query = collection(db, `notebooks/${queryID}/notes`)
-
-  const refreshData = () => {
-    onSnapshot(query, (snapshot) => {
-      snapshot.docs.map((doc) => setNotesList([...notesList, doc.data()]))
-    })
-  }
-
-  const addDoc = () => {
+  const addADoc = async () => {
     const title = prompt('Enter a title for your note.')
 
     const newNote = {
@@ -53,15 +44,29 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
       markdown: '',
       timestamp: serverTimestamp(),
     }
-    setDoc(doc(collection(db, `notebooks/${queryID}/notes`)), newNote, {
+
+    // create a new document in the collection with the new note
+    await setDoc(doc(collection(db, `notebooks/${queryID}/notes`)), newNote, {
       merge: true,
     })
-
-    refreshData()
   }
 
+  console.log(notesList)
+
   useEffect(() => {
-    refreshData()
+    // retrieve the notes for the current notebook
+    const notesRef = collection(db, `notebooks/${queryID}/notes`)
+
+    // listen for changes to the notes
+    onSnapshot(notesRef, (snapshot) => {
+      const notesArr: any = []
+
+      snapshot.forEach((doc) => {
+        notesArr.push(doc.data())
+      })
+
+      setNotesList(notesArr)
+    })
   }, [])
 
   return (
@@ -73,7 +78,7 @@ const NotebookIndex = ({ notes, notebookInfo }: ssProps) => {
         <h1 className="inline-flex w-full items-center justify-between text-3xl font-bold text-stone-800">
           {notebookInfo?.title}
           <HiOutlineDocumentAdd
-            onClick={addDoc}
+            onClick={addADoc}
             className="h-8 w-8 rounded p-1 transition ease-in-out hover:cursor-pointer hover:bg-stone-100 hover:ring-1 hover:ring-stone-300"
           />
         </h1>
