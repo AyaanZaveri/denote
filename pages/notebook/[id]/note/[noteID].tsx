@@ -62,6 +62,16 @@ const NoteID = () => {
           }}
           className="inline-flex items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-stone-800 outline-none hover:bg-stone-50 focus:bg-stone-100"
         />
+        <textarea
+          defaultValue={markdown}
+          onChange={(e) => {
+            setNoteData({
+              ...noteData,
+              markdown: e.target.value,
+            })
+          }}
+          className="h-64 w-full rounded-lg p-1.5 font-bold text-stone-800 outline-none hover:bg-stone-50 focus:bg-stone-100"
+        />
       </div>
     </div>
   )
