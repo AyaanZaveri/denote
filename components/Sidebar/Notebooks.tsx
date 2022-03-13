@@ -44,7 +44,7 @@ const Notebooks = () => {
           />
         )}
       </span>
-      <div className="mt-1 flex w-full flex-col">
+      <div className="mt-1 flex w-full flex-col gap-1">
         {value && !loading
           ? value?.docs.map((doc) => (
               <Notebook key={doc.id} id={doc.id} title={doc.data().title} />
