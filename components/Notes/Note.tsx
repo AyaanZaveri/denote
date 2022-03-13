@@ -48,7 +48,7 @@ const Note = ({ id, timestamp, title, tag, markdown, notebookID }: Props) => {
   return (
     <div>
       <div
-        className={`relative cursor-pointer rounded-lg bg-gray-50 p-3 transition ease-in-out ${
+        className={`relative cursor-pointer rounded-lg bg-gray-50 p-3 transition delay-200 ease-in-out ${
           id == queryID ? 'bg-gray-200' : 'hover:bg-gray-100'
         }`}
       >

@@ -117,16 +117,15 @@ const NotebookIndex = ({ notes }: ssProps) => {
             />
           </div>
         </h1>
+
         <div className="mt-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-2">
-              <HiOutlineSearchCircle
-                className="h-6 w-6 text-gray-500 transition delay-200 ease-in-out hover:text-blue-500"
-              />
+              <HiOutlineSearchCircle className="h-6 w-6 text-gray-500 transition delay-200 ease-in-out hover:text-blue-500" />
             </div>
             <input
               type="text"
-              className="w-full rounded-lg bg-gray-50 px-2 py-2 pl-10 text-gray-800 outline-none hover:bg-gray-100 focus:bg-gray-100"
+              className="w-full rounded-lg bg-gray-50 px-2 py-2 pl-10 text-gray-800 outline-none hover:bg-gray-100 focus:bg-gray-100 transition delay-200 ease-in-out"
               placeholder="Search..."
               onChange={(e) => setSearch(e.target.value)}
             />
