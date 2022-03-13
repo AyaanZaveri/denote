@@ -4,8 +4,19 @@ import React, { useEffect, useRef, useState } from 'react'
 import NotebookIndex from '..'
 import { db } from '../../../../firebase'
 import TextareaAutosize from 'react-textarea-autosize'
+import { Editor, EditorState } from 'draft-js'
+import 'draft-js/dist/Draft.css'
 
 const NoteID = () => {
+  const [editorState, setEditorState] = useState<any>(() =>
+    EditorState.createEmpty()
+  )
+
+  const editor = React.useRef<any>(null)
+  function focusEditor() {
+    editor.current.focus()
+  }
+
   const router = useRouter()
 
   const [noteData, setNoteData] = useState<any>({
@@ -63,8 +74,7 @@ const NoteID = () => {
           }}
           className="inline-flex items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-gray-800 outline-none hover:bg-gray-50 focus:bg-gray-100"
         />
-        {/* Make an autoresize text-area */}
-        <TextareaAutosize
+        {/* <TextareaAutosize
           defaultValue={markdown}
           onChange={(e) => {
             setNoteData({
@@ -74,7 +84,22 @@ const NoteID = () => {
           }}
           placeholder="What's on your mind?"
           className="w-full resize-none overflow-hidden rounded-lg p-1.5 text-gray-800 outline-none"
-        />
+        /> */}
+        <div
+          style={{
+            border: '1px solid black',
+            minHeight: '6em',
+            cursor: 'text',
+          }}
+          onClick={focusEditor}
+        >
+          <Editor
+            ref={editor}
+            editorState={editorState}
+            onChange={setEditorState}
+            placeholder="Write something!"
+          />
+        </div>
       </div>
     </div>
   )
