@@ -7,7 +7,7 @@ const Login = () => {
   return (
     <div className="grid h-screen place-content-center place-items-center gap-5">
       <h1 className="text-5xl font-bold text-gray-800">
-        Welcome to <span className="text-rose-500">Denote</span>
+        Welcome to <span className="text-blue-500">Denote</span>
       </h1>
       <Button
         variant="ring"

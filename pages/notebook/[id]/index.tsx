@@ -102,7 +102,7 @@ const NotebookIndex = ({ notes }: ssProps) => {
           {notebookInfo?.title}
           <HiOutlineDocumentAdd
             onClick={addADoc}
-            className="h-7 w-7 rounded bg-gray-100 p-1 ring-1 ring-gray-300 transition delay-200 ease-in-out hover:cursor-pointer hover:ring-rose-500 hover:bg-rose-500 hover:text-gray-50"
+            className="h-7 w-7 rounded bg-gray-100 p-1 ring-1 ring-gray-300 transition delay-200 ease-in-out hover:cursor-pointer hover:ring-blue-500 hover:bg-blue-500 hover:text-gray-50"
           />
         </h1>
         <div className="mt-4">

@@ -5,7 +5,7 @@ import { auth, db } from '../../firebase'
 import { addDoc, collection, query, setDoc, where } from 'firebase/firestore'
 import { CgSpinner } from 'react-icons/cg'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { HiOutlinePlusSm } from 'react-icons/hi'
+import { HiOutlinePlusCircle } from 'react-icons/hi'
 
 const Notebooks = () => {
   const [user] = useAuthState(auth)
@@ -33,14 +33,14 @@ const Notebooks = () => {
 
   return (
     <div>
-      <span className="mt-5 inline-flex items-center gap-2 text-left text-xl font-bold text-gray-800">
+      <span className="mt-5 inline-flex items-center gap-1 text-left text-xl font-bold text-gray-800">
         Notebooks{' '}
         {loading ? (
           <CgSpinner className="h-5 w-5 animate-spin text-gray-800" />
         ) : (
-          <HiOutlinePlusSm
+          <HiOutlinePlusCircle
             onClick={addNotebook}
-            className="h-5 w-5 rounded border border-gray-300 transition delay-200 ease-in-out hover:cursor-pointer hover:border-rose-500 hover:bg-rose-500 hover:text-gray-50"
+            className="h-5 w-5 transition delay-200 ease-in-out text-gray-500 hover:text-gray-800 hover:cursor-pointer"
           />
         )}
       </span>

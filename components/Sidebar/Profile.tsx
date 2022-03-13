@@ -10,17 +10,19 @@ interface Props {
 
 const Profile = ({ name, photoURL }: Props) => {
   return (
-    <div className="mt-4 flex h-16 items-center justify-between rounded-lg border bg-white">
+    <div className="mt-4 flex h-14 items-center justify-start rounded-lg ">
       <div className="inline-flex items-center gap-2">
         <img
-          className="ml-3 w-8 rounded-full border border-gray-300 transition delay-200 ease-in-out hover:cursor-pointer hover:brightness-90"
+          className="w-9 rounded-full transition delay-200 ease-in-out hover:cursor-pointer hover:brightness-90"
           src={photoURL}
           alt=""
           onClick={() => signOut(auth)}
         />
-        <span className="font-semibold text-gray-800">{name}</span>
+        <div className='flex flex-col'>
+          <span className='text-[10px]'>You're signed in as</span>
+          <span className="font-semibold text-gray-800 text-sm leading-4">{name}</span>
+        </div>
       </div>
-      <HiChevronDown className="mr-3 inline-flex h-6 w-6 text-gray-800 transition delay-200 ease-in-out hover:cursor-pointer hover:text-rose-500" />
     </div>
   )
 }
