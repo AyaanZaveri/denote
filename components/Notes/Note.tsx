@@ -46,7 +46,7 @@ const Note = ({ id, timestamp, title, tag, markdown, notebookID }: Props) => {
           onClick={removeDoc}
           className="absolute top-0 right-0 m-1.5 text-[12px]"
         >
-          <HiOutlineTrash className="h-4 w-4 rounded-full text-gray-800 transition delay-200 ease-in-out hover:text-blue-500" />
+          <HiOutlineTrash className="h-4 w-4 rounded-full transition delay-200 ease-in-out text-gray-500 hover:text-blue-500" />
         </button>
       </div>
     </div>
