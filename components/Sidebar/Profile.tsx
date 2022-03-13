@@ -19,7 +19,7 @@ const Profile = ({ name, photoURL }: Props) => {
           onClick={() => signOut(auth)}
         />
         <div className="flex flex-col">
-          <span className="text-[10px]">You're signed in as</span>
+          <span className="text-[10px] text-gray-600">You're signed in as</span>
           <span className="text-sm font-semibold leading-4 text-gray-800">
             {name}
           </span>
