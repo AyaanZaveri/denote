@@ -1,15 +1,6 @@
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-  orderBy,
-  query,
-} from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { CgMoreAlt } from 'react-icons/cg'
-import { db } from '../../firebase'
+import { Popover } from "@headlessui/react";
 
 const Notebook = ({ title }: { title: string }) => {
   const [showOptions, setShowOptions] = useState(false)
