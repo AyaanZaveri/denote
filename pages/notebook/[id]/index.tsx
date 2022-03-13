@@ -15,7 +15,7 @@ import {
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { HiOutlineDocumentAdd } from 'react-icons/hi'
+import { HiOutlineDocumentAdd, HiOutlinePlusCircle } from 'react-icons/hi'
 import Notes from '../../../components/Notes'
 import Sidebar from '../../../components/Sidebar'
 import { auth, db } from '../../../firebase'
@@ -94,15 +94,15 @@ const NotebookIndex = ({ notes }: ssProps) => {
 
   return (
     <div>
-      <div className="fixed flex items-center h-screen">
+      <div className="fixed flex h-screen items-center">
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
       <div className="scrollbar fixed top-0 bottom-0 ml-[17rem] h-full w-80 overflow-y-auto p-5 pb-8">
         <h1 className="inline-flex w-full items-center justify-between pt-1 text-3xl font-bold text-gray-800">
           {notebookInfo?.title}
-          <HiOutlineDocumentAdd
+          <HiOutlinePlusCircle
             onClick={addADoc}
-            className="h-7 w-7 rounded bg-gray-50 hover:bg-gray-100 p-1 transition delay-200 ease-in-out hover:cursor-pointer"
+            className="h-6 w-6 text-gray-500 hover:rotate-90 transition delay-200 ease-in-out hover:cursor-pointer hover:text-blue-500"
           />
         </h1>
         <div className="mt-4">

@@ -75,7 +75,6 @@ const NoteID = () => {
           placeholder="What's on your mind?"
           className="w-full resize-none overflow-hidden rounded-lg p-1.5 text-gray-800 outline-none"
         />
-        
       </div>
     </div>
   )
