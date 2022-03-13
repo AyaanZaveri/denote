@@ -4,9 +4,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import NotebookIndex from '..'
 import { db } from '../../../../firebase'
 import TextareaAutosize from 'react-textarea-autosize'
+import ReactMarkdown from 'react-markdown'
 
 const NoteID = () => {
-
   const router = useRouter()
 
   const [noteData, setNoteData] = useState<any>({
@@ -72,9 +72,13 @@ const NoteID = () => {
               markdown: e.target.value,
             })
           }}
+          minRows={10}
           placeholder="What's on your mind?"
           className="w-full resize-none overflow-hidden rounded-lg p-1.5 text-gray-800 outline-none"
         />
+        <div className="prose">
+          <ReactMarkdown>{markdown}</ReactMarkdown>
+        </div>
       </div>
     </div>
   )

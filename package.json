@@ -8,6 +8,7 @@
   "dependencies": {
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
+    "@tailwindcss/typography": "^0.5.2",
     "draft-js": "^0.11.7",
     "easymde": "^2.16.1",
     "firebase": "^9.6.8",
