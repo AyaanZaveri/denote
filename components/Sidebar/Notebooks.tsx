@@ -40,16 +40,14 @@ const Notebooks = () => {
         ) : (
           <HiOutlinePlusCircle
             onClick={addNotebook}
-            className="h-5 w-5 transition delay-200 ease-in-out text-gray-500 hover:text-blue-500 hover:cursor-pointer"
+            className="h-5 w-5 text-gray-500 transition delay-200 ease-in-out hover:cursor-pointer hover:text-blue-500"
           />
         )}
       </span>
       <div className="mt-1 flex w-full flex-col">
         {value && !loading
           ? value?.docs.map((doc) => (
-              <a key={doc.id} href={`/notebook/${doc.id}`}>
-                <Notebook key={doc.id} title={doc.data().title} />
-              </a>
+              <Notebook key={doc.id} id={doc.id} title={doc.data().title} />
             ))
           : null}
       </div>
