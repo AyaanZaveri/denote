@@ -15,7 +15,7 @@ import {
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { HiOutlineDocumentAdd, HiOutlinePlusCircle } from 'react-icons/hi'
+import { HiOutlinePlusCircle, HiOutlineSearchCircle } from 'react-icons/hi'
 import Notes from '../../../components/Notes'
 import Sidebar from '../../../components/Sidebar'
 import { auth, db } from '../../../firebase'
@@ -28,6 +28,9 @@ const NotebookIndex = ({ notes }: ssProps) => {
   const [notesList, setNotesList] = useState(
     notes?.length! > 0 ? JSON.parse(notes!) : []
   )
+
+  const [search, setSearch] = useState('')
+  const [showInput, setShowInput] = useState(false)
 
   const [notebookInfo, setNotebookInfo] = useState<any>({
     id: '',
@@ -92,6 +95,13 @@ const NotebookIndex = ({ notes }: ssProps) => {
     })
   }, [])
 
+  const getFilteredNotes = () => {
+    const filteredNotes = notesList.filter((note: any) =>
+      note.title.toLowerCase().includes(search.toLowerCase())
+    )
+    return filteredNotes
+  }
+
   return (
     <div>
       <div className="fixed flex h-screen items-center">
@@ -100,13 +110,32 @@ const NotebookIndex = ({ notes }: ssProps) => {
       <div className="scrollbar fixed top-0 bottom-0 ml-[17rem] h-full w-80 overflow-y-auto p-5 pb-8">
         <h1 className="inline-flex w-full items-center justify-between pt-1 text-3xl font-bold text-gray-800">
           {notebookInfo?.title}
-          <HiOutlinePlusCircle
-            onClick={addADoc}
-            className="h-6 w-6 text-gray-500 hover:rotate-90 transition delay-200 ease-in-out hover:cursor-pointer hover:text-blue-500"
-          />
+          <div className="inline-flex">
+            <HiOutlinePlusCircle
+              onClick={addADoc}
+              className="h-6 w-6 text-gray-500 transition delay-200 ease-in-out hover:rotate-90 hover:cursor-pointer hover:text-blue-500"
+            />
+          </div>
         </h1>
         <div className="mt-4">
-          <Notes notes={notesList} notebookInfo={notebookInfo!} />
+          <div className="relative">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
+              <HiOutlineSearchCircle className="h-6 w-6 text-gray-500" />
+            </div>
+            <input
+              type="text"
+              className="w-full rounded-lg bg-gray-50 px-2 py-2 pl-10 text-gray-800 outline-none focus:bg-gray-100"
+              placeholder="Search..."
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+
+          <div className="mt-3">
+            <Notes
+              notes={search ? getFilteredNotes() : notesList}
+              notebookInfo={notebookInfo!}
+            />
+          </div>
         </div>
       </div>
     </div>
