@@ -15,7 +15,7 @@ const Notebook = ({ id, title }: { id: string; title: string }) => {
 
   return (
     <div
-      className={`relative inline-flex w-full items-center justify-between rounded-md p-1 pl-2 hover:cursor-pointer ${
+      className={`relative inline-flex w-full items-center justify-between transition delay-200 ease-in-out rounded-md p-1 pl-2 hover:cursor-pointer ${
         id == queryID ? 'bg-gray-200' : 'hover:bg-gray-100'
       }`}
     >
@@ -25,7 +25,7 @@ const Notebook = ({ id, title }: { id: string; title: string }) => {
       <div>
         <CgMoreAlt
           onClick={removeNotebook}
-          className="mr-1 h-5 w-5 rounded text-gray-600 hover:bg-gray-200"
+          className="mr-1 h-5 w-5 rounded text-gray-600 hover:bg-gray-200 transition delay-200 ease-in-out"
         />
       </div>
     </div>
