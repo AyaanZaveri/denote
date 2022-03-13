@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { CgMoreAlt } from 'react-icons/cg'
 import { Popover } from '@headlessui/react'
+import { TrashIcon } from '@heroicons/react/outline'
 
 const Notebook = ({ id, title }: { id: string; title: string }) => {
   const [showOptions, setShowOptions] = useState(false)
@@ -11,7 +12,7 @@ const Notebook = ({ id, title }: { id: string; title: string }) => {
         <span className="text-gray-800">{title}</span>
       </a>
       <div>
-        <Popover className="flex items-center z-20">
+        <Popover className="z-20 flex items-center">
           <Popover.Button>
             <CgMoreAlt
               onClick={() => setShowOptions(!showOptions)}
@@ -20,8 +21,11 @@ const Notebook = ({ id, title }: { id: string; title: string }) => {
           </Popover.Button>
 
           <Popover.Panel className="absolute z-30 mb-16">
-            <div className="h-6 w-28 border bg-white p-5">
-              <button>Delete</button>
+            <div className="h-12 w-32 border bg-white">
+              <div className="inline-flex text-gray-800 hover:text-blue-500">
+                <TrashIcon className="h-5 w-5" />
+                Delete
+              </div>
             </div>
           </Popover.Panel>
         </Popover>
