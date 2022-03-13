@@ -10,7 +10,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <div className="flex items-center h-screen">
+      <div className="fixed flex items-center h-screen">
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
     </div>
