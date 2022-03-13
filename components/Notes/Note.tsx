@@ -3,6 +3,7 @@ import luxon, { DateTime } from 'luxon'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { collection, deleteDoc, doc } from 'firebase/firestore'
 import { db } from '../../firebase'
+import { useRouter } from 'next/router'
 
 interface Props {
   id: string
@@ -34,6 +35,10 @@ const Note = ({ id, timestamp, title, tag, markdown, notebookID }: Props) => {
     }
   }
 
+  const router = useRouter()
+
+  const { noteID: queryID } = router.query
+
   const removeDoc = () => {
     deleteDoc(doc(collection(db, `notebooks/${notebookID}/notes`), id))
   }
@@ -42,7 +47,11 @@ const Note = ({ id, timestamp, title, tag, markdown, notebookID }: Props) => {
 
   return (
     <div>
-      <div className="relative cursor-pointer rounded-lg bg-gray-50 p-3 transition ease-in-out hover:bg-gray-100">
+      <div
+        className={`relative cursor-pointer rounded-lg bg-gray-50 p-3 transition ease-in-out ${
+          id == queryID ? 'bg-gray-200' : 'hover:bg-gray-100'
+        }`}
+      >
         <div className="flex flex-col">
           <a href={`/notebook/${notebookID}/note/${id}`}>
             <span className="font-semibold text-gray-800 transition delay-200 ease-in-out hover:underline">
