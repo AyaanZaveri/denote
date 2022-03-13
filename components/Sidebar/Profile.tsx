@@ -13,14 +13,16 @@ const Profile = ({ name, photoURL }: Props) => {
     <div className="mt-4 flex h-14 items-center justify-start rounded-lg ">
       <div className="inline-flex items-center gap-2">
         <img
-          className="w-9 rounded-full transition delay-200 ease-in-out hover:cursor-pointer hover:brightness-90"
+          className="w-9 overflow-hidden rounded-full transition delay-200 ease-in-out hover:cursor-pointer hover:brightness-90"
           src={photoURL}
           alt=""
           onClick={() => signOut(auth)}
         />
-        <div className='flex flex-col'>
-          <span className='text-[10px]'>You're signed in as</span>
-          <span className="font-semibold text-gray-800 text-sm leading-4">{name}</span>
+        <div className="flex flex-col">
+          <span className="text-[10px]">You're signed in as</span>
+          <span className="text-sm font-semibold leading-4 text-gray-800">
+            {name}
+          </span>
         </div>
       </div>
     </div>

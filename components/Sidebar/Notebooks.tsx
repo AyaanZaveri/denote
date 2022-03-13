@@ -40,7 +40,7 @@ const Notebooks = () => {
         ) : (
           <HiOutlinePlusCircle
             onClick={addNotebook}
-            className="h-5 w-5 transition delay-200 ease-in-out text-gray-500 hover:text-gray-800 hover:cursor-pointer"
+            className="h-5 w-5 transition delay-200 ease-in-out text-gray-500 hover:text-blue-500 hover:cursor-pointer"
           />
         )}
       </span>
