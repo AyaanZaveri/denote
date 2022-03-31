@@ -11,6 +11,7 @@
     "@tailwindcss/typography": "^0.5.2",
     "draft-js": "^0.11.7",
     "easymde": "^2.16.1",
+    "emoji-mart": "^3.0.1",
     "firebase": "^9.6.8",
     "luxon": "^2.3.1",
     "next": "latest",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@types/draft-js": "^0.11.9",
+    "@types/emoji-mart": "^3.0.9",
     "@types/luxon": "^2.3.0",
     "@types/node": "17.0.4",
     "@types/react": "17.0.38",
