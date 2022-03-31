@@ -21,21 +21,34 @@ const Notebook = ({ id, data, setNotebook }: Props) => {
 
   const { id: queryID } = router.query
 
+  const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false)
+
   return (
     <div
       className={`relative inline-flex w-full items-center justify-between rounded-md p-1 pl-2 transition delay-200 ease-in-out hover:cursor-pointer ${
         id == queryID ? 'bg-gray-200' : 'hover:bg-gray-100'
       }`}
     >
-      <div className="inline-flex items-center gap-0.5">
-        <input
-          value={data.tag}
-          onChange={(e) => setNotebook({ ...data, tag: e.target.value }, id)}
+      <div className="relative inline-flex items-center gap-0.5">
+        <button
+          onClick={() => setShowEmojiPicker(!showEmojiPicker)}
           className="mr-1 flex h-5 w-5 items-center justify-center rounded bg-transparent text-gray-600 transition delay-200 ease-in-out hover:bg-gray-200"
-        />
+        >
+          <span>{data.emoji}</span>
+        </button>
         <a key={id} href={`/notebook/${id}`}>
           <span className="text-gray-800">{data.title}</span>
         </a>
+        <div className={`absolute top-0 mt-8 z-30`}>
+          {showEmojiPicker ? (
+            <Picker
+              set="apple"
+              onSelect={(emoji: any) => {
+                setNotebook({ ...data, emoji: emoji?.native }, id)
+              }}
+            />
+          ) : null}
+        </div>
       </div>
       <div>
         <CgMoreAlt

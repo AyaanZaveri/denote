@@ -33,7 +33,7 @@ const Notebooks = () => {
     await addDoc(collection(db, 'notebooks'), {
       title: title ? title : 'Untitled Notebook',
       userID: user?.uid,
-      tag: '📓',
+      emoji: '📓',
     })
   }
 
