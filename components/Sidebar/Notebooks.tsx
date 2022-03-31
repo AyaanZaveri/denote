@@ -26,6 +26,7 @@ const Notebooks = () => {
     await addDoc(collection(db, 'notebooks'), {
       title: title ? title : 'Untitled Notebook',
       userID: user?.uid,
+      tag: '📓',
     })
   }
 
@@ -44,7 +45,7 @@ const Notebooks = () => {
           />
         )}
       </span>
-      <div className="mt-1 flex w-full flex-col gap-1">
+      <div className="mt-2 flex w-full flex-col gap-1">
         {value && !loading
           ? value?.docs.map((doc) => (
               <Notebook key={doc.id} id={doc.id} title={doc.data().title} />
