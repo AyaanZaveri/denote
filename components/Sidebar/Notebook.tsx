@@ -19,9 +19,14 @@ const Notebook = ({ id, title }: { id: string; title: string }) => {
         id == queryID ? 'bg-gray-200' : 'hover:bg-gray-100'
       }`}
     >
-      <a key={id} href={`/notebook/${id}`}>
-        <span className="text-gray-800">{title}</span>
-      </a>
+      <div className='inline-flex gap-0.5 items-center'>
+        <span contentEditable={true} className="mr-1 flex h-5 w-5 items-center justify-center rounded text-gray-600 transition delay-200 ease-in-out hover:bg-gray-200">
+          👨‍💻
+        </span>
+        <a key={id} href={`/notebook/${id}`}>
+          <span className="text-gray-800">{title}</span>
+        </a>
+      </div>
       <div>
         <CgMoreAlt
           onClick={removeNotebook}
