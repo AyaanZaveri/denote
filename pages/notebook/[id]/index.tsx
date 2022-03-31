@@ -43,12 +43,6 @@ const NotebookIndex = ({ notes }: ssProps) => {
 
   const queryID = router.query.id
 
-  console.log(notebookInfo)
-
-  if (notebookInfo.userID != user?.uid) {
-    router.push('/')
-  }
-
   // Getting Notebook Info
 
   const getNotebookInfo = async () => {
@@ -65,7 +59,11 @@ const NotebookIndex = ({ notes }: ssProps) => {
     getNotebookInfo()
   }, [])
 
-  console.log(notebookInfo)
+  if (user?.uid && notebookInfo.userID) {
+    if (user?.uid != notebookInfo.userID) {
+      router.push('/')
+    }
+  }
 
   const addADoc = async () => {
     const title = prompt('Enter a title for your note.')
@@ -131,7 +129,7 @@ const NotebookIndex = ({ notes }: ssProps) => {
             </div>
             <input
               type="text"
-              className="w-full rounded-lg bg-gray-50 px-2 py-2 pl-10 text-gray-800 outline-none hover:bg-gray-100 focus:bg-gray-100 transition delay-200 ease-in-out"
+              className="w-full rounded-lg bg-gray-50 px-2 py-2 pl-10 text-gray-800 outline-none transition delay-200 ease-in-out hover:bg-gray-100 focus:bg-gray-100"
               placeholder="Search..."
               onChange={(e) => setSearch(e.target.value)}
             />
