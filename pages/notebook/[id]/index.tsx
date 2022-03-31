@@ -43,6 +43,12 @@ const NotebookIndex = ({ notes }: ssProps) => {
 
   const queryID = router.query.id
 
+  console.log(notebookInfo)
+
+  if (notebookInfo.userID != user?.uid) {
+    router.push('/')
+  }
+
   // Getting Notebook Info
 
   const getNotebookInfo = async () => {
