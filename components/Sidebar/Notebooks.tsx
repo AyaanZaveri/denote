@@ -35,7 +35,7 @@ const Notebooks = () => {
   })
 
   const addNotebook = async () => {
-    const title = prompt('Enter a title for your notebook.')
+    const title = "Untitled Notebook"
 
     if (title || title === '') {
       await addDoc(collection(db, 'notebooks'), {

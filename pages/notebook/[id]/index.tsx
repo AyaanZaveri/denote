@@ -2,6 +2,7 @@ import { RefreshIcon } from '@heroicons/react/solid'
 import { getAuth } from 'firebase/auth'
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -15,7 +16,11 @@ import {
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { HiOutlinePlusCircle, HiOutlineSearchCircle } from 'react-icons/hi'
+import {
+  HiOutlinePlusCircle,
+  HiOutlineSearchCircle,
+  HiOutlineTrash,
+} from 'react-icons/hi'
 import Notes from '../../../components/Notes'
 import Sidebar from '../../../components/Sidebar'
 import { auth, db } from '../../../firebase'
@@ -106,6 +111,23 @@ const NotebookIndex = ({ notes }: ssProps) => {
     return filteredNotes
   }
 
+  const removeNotebook = () => {
+    deleteDoc(doc(collection(db, `notebooks`), `${queryID}`))
+  }
+
+  const notebooksRef = collection(db, `notebooks`)
+
+  const checkIfNotebookExists = async () => {
+    const notebookDoc = await getDoc(doc(notebooksRef, `${queryID}`))
+    if (notebookDoc.data() === undefined) {
+      router.push('/')
+    }
+  }
+
+  useEffect(() => {
+    checkIfNotebookExists()
+  })
+
   return (
     <div>
       <div className="fixed flex h-screen items-center">
@@ -114,7 +136,11 @@ const NotebookIndex = ({ notes }: ssProps) => {
       <div className="scrollbar fixed top-0 bottom-0 ml-[17rem] h-full w-80 overflow-y-auto p-5 pb-8">
         <h1 className="inline-flex w-full items-center justify-between pt-1 text-3xl font-bold text-gray-800">
           {notebookInfo?.title}
-          <div className="inline-flex">
+          <div className="inline-flex gap-1">
+            <HiOutlineTrash
+              onClick={removeNotebook}
+              className="h-6 w-6 text-gray-500 transition delay-200 ease-in-out hover:scale-110 hover:cursor-pointer hover:text-blue-500"
+            />
             <HiOutlinePlusCircle
               onClick={addADoc}
               className="h-6 w-6 text-gray-500 transition delay-200 ease-in-out hover:rotate-90 hover:cursor-pointer hover:text-blue-500"

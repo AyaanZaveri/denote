@@ -39,7 +39,7 @@ const Notebook = ({ id, data, setNotebook }: Props) => {
         id == queryID ? 'bg-gray-200' : 'hover:bg-gray-100'
       }`}
     >
-      <div className="relative inline-flex items-center gap-1">
+      <div className="relative inline-flex items-center gap-2">
         <button
           onClick={() => setShowEmojiPicker(!showEmojiPicker)}
           className="flex h-5 w-5 items-center justify-center rounded bg-transparent text-gray-600 transition delay-200 ease-in-out hover:bg-gray-200"
