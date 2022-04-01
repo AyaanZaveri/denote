@@ -148,7 +148,7 @@ const NotebookIndex = ({ notes }: ssProps) => {
             onChange={(e) => {
               changeNotebookInfo({
                 ...notebookInfo,
-                title: e.target.value,
+                title: e.target.value === '' ? 'Untitled Notebook' : e.target.value,
               })
             }}
             className="inline-flex w-9/12 resize-none items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-gray-800 outline-none hover:bg-gray-50 focus:bg-gray-100"
