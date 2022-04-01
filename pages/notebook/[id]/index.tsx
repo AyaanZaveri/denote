@@ -85,24 +85,9 @@ const NotebookIndex = ({ notes }: ssProps) => {
     })
   }
 
-  useEffect(() => {
-    // Retrieves the notes for the current notebook (${queryID})
-    const notesRef = collection(db, `notebooks/${queryID}/notes`)
-
-    // Listens for changes to the notes collection
-    onSnapshot(notesRef, (snapshot) => {
-      const notesArr: any = []
-
-      snapshot.forEach((doc) => {
-        notesArr.push({
-          ...doc.data(),
-          id: doc.id,
-        })
-      })
-
-      setNotesList(notesArr)
-    })
-  }, [])
+  const changeNotebookInfo = async (notebookInfo: any) => {
+    await setDoc(doc(db, `notebooks/${queryID}`), notebookInfo)
+  }
 
   const getFilteredNotes = () => {
     const filteredNotes = notesList.filter((note: any) =>
@@ -125,8 +110,11 @@ const NotebookIndex = ({ notes }: ssProps) => {
   }
 
   useEffect(() => {
-    checkIfNotebookExists()
-  })
+    const interval = setInterval(() => {
+      checkIfNotebookExists()
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div>
@@ -134,8 +122,17 @@ const NotebookIndex = ({ notes }: ssProps) => {
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
       <div className="scrollbar fixed top-0 bottom-0 ml-[17rem] h-full w-80 overflow-y-auto p-5 pb-8">
-        <h1 className="inline-flex w-full items-center justify-between pt-1 text-3xl font-bold text-gray-800">
-          {notebookInfo?.title}
+        <div className="inline-flex w-full items-center justify-between pt-1 text-3xl font-bold text-gray-800">
+          <input
+            defaultValue={notebookInfo?.title}
+            onChange={(e) => {
+              changeNotebookInfo({
+                ...notebookInfo,
+                title: e.target.value,
+              })
+            }}
+            className="inline-flex w-10/12 resize-none items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-gray-800 outline-none hover:bg-gray-50 focus:bg-gray-100"
+          />
           <div className="inline-flex gap-1">
             <HiOutlineTrash
               onClick={removeNotebook}
@@ -146,7 +143,7 @@ const NotebookIndex = ({ notes }: ssProps) => {
               className="h-6 w-6 text-gray-500 transition delay-200 ease-in-out hover:rotate-90 hover:cursor-pointer hover:text-blue-500"
             />
           </div>
-        </h1>
+        </div>
 
         <div className="mt-4">
           <div className="relative">
