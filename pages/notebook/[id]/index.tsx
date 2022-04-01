@@ -151,7 +151,7 @@ const NotebookIndex = ({ notes }: ssProps) => {
                 title: e.target.value,
               })
             }}
-            className="inline-flex w-10/12 resize-none items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-gray-800 outline-none hover:bg-gray-50 focus:bg-gray-100"
+            className="inline-flex w-9/12 resize-none items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-gray-800 outline-none hover:bg-gray-50 focus:bg-gray-100"
           />
           <div className="inline-flex gap-1">
             <HiOutlineTrash

@@ -35,7 +35,7 @@ const Notebook = ({ id, data, setNotebook }: Props) => {
 
   return (
     <div
-      className={`relative inline-flex w-full bg-gray-50 active:bg-gray-200 items-center justify-between rounded-md p-1 pl-2 transition delay-200 ease-in-out hover:cursor-pointer ${
+      className={`relative inline-flex break-all w-full items-center justify-between rounded-md bg-gray-50 p-1 pl-2 transition delay-200 ease-in-out hover:cursor-pointer active:bg-gray-200 ${
         id == queryID ? 'bg-gray-200' : 'hover:bg-gray-100'
       }`}
     >
