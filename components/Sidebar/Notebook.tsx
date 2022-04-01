@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { CgMoreAlt } from 'react-icons/cg'
-import { doc, deleteDoc, collection } from 'firebase/firestore'
-import { db } from '../../firebase'
+import { doc, deleteDoc, collection, query, where } from 'firebase/firestore'
+import { auth, db } from '../../firebase'
 import { useRouter } from 'next/router'
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { useCollection } from 'react-firebase-hooks/firestore'
 
 interface Props {
   id: string
@@ -13,6 +15,14 @@ interface Props {
 }
 
 const Notebook = ({ id, data, setNotebook }: Props) => {
+  const [user] = useAuthState(auth)
+
+  const usersRef = collection(db, 'users')
+  const userQuery = query(usersRef, where('uid', '==', user?.uid))
+  const [userValue, userLoading, userError] = useCollection(userQuery, {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  })
+
   const removeNotebook = () => {
     deleteDoc(doc(collection(db, `notebooks`), id))
   }
@@ -29,17 +39,17 @@ const Notebook = ({ id, data, setNotebook }: Props) => {
         id == queryID ? 'bg-gray-200' : 'hover:bg-gray-100'
       }`}
     >
-      <div className="relative inline-flex items-center gap-0.5">
+      <div className="relative inline-flex items-center gap-1">
         <button
           onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-          className="mr-1 flex h-5 w-5 items-center justify-center rounded bg-transparent text-gray-600 transition delay-200 ease-in-out hover:bg-gray-200"
+          className="flex h-5 w-5 items-center justify-center rounded bg-transparent text-gray-600 transition delay-200 ease-in-out hover:bg-gray-200"
         >
           <span>{data.emoji}</span>
         </button>
         <a key={id} href={`/notebook/${id}`}>
           <span className="text-gray-800">{data.title}</span>
         </a>
-        <div className={`absolute top-0 mt-8 z-30`}>
+        <div className={`absolute top-0 z-30 mt-8`}>
           {showEmojiPicker ? (
             <Picker
               set="apple"

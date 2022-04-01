@@ -13,6 +13,7 @@ import {
 import { CgSpinner } from 'react-icons/cg'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { HiOutlinePlusCircle } from 'react-icons/hi'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 const Notebooks = () => {
   const [user] = useAuthState(auth)
@@ -27,13 +28,27 @@ const Notebooks = () => {
     snapshotListenOptions: { includeMetadataChanges: true },
   })
 
+  const usersRef = collection(db, 'users')
+  const userQuery = query(usersRef, where('uid', '==', user?.uid))
+  const [userValue, userLoading, userError] = useCollection(userQuery, {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  })
+
   const addNotebook = async () => {
     const title = prompt('Enter a title for your notebook.')
 
-    await addDoc(collection(db, 'notebooks'), {
-      title: title ? title : 'Untitled Notebook',
-      userID: user?.uid,
-      emoji: '📓',
+    if (title || title === '') {
+      await addDoc(collection(db, 'notebooks'), {
+        title: title ? title : 'Untitled Notebook',
+        userID: user?.uid,
+        emoji: '📓',
+      })
+    }
+
+    const notebookOrder = userValue?.docs[0]?.data().notebookOrder
+
+    await setDoc(doc(db, 'users', `${user?.uid}`), {
+      notebookOrder: [...(notebookOrder ? notebookOrder : []), title],
     })
   }
 
@@ -57,16 +72,44 @@ const Notebooks = () => {
         )}
       </span>
       <div className="mt-2 flex w-full flex-col gap-1">
-        {value && !loading
-          ? value?.docs.map((doc) => (
-              <Notebook
-                key={doc.id}
-                id={doc.id}
-                data={doc.data()}
-                setNotebook={setNotebook}
-              />
-            ))
-          : null}
+        <DragDropContext onDragEnd={() => {}}>
+          <Droppable droppableId="droppable">
+            {(provided) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className="flex flex-col gap-1"
+              >
+                {value && !loading
+                  ? value?.docs.map((doc, index) => (
+                      <Draggable
+                        key={doc.id}
+                        draggableId={doc.id}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            className="flex flex-col gap-1"
+                          >
+                            <Notebook
+                              key={doc.id}
+                              id={doc.id}
+                              data={doc.data()}
+                              setNotebook={setNotebook}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))
+                  : null}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
     </div>
   )

@@ -3,16 +3,23 @@ import '../styles/markdown.css'
 import type { AppProps } from 'next/app'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../firebase'
-import { collection, doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import {
+  collection,
+  doc,
+  query,
+  serverTimestamp,
+  setDoc,
+  where,
+} from 'firebase/firestore'
 import { useEffect } from 'react'
 import Login from './login'
 import Loading from '../components/Loading'
+import { useCollection } from 'react-firebase-hooks/firestore'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [user, loading] = useAuthState(auth)
 
   const userRef = collection(db, 'users')
-
   useEffect(() => {
     if (user) {
       setDoc(
