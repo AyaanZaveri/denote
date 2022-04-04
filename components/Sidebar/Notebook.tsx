@@ -9,6 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { Menu } from '@headlessui/react'
 import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi'
+import { PencilIcon } from '@heroicons/react/outline'
 
 interface Props {
   id: string
@@ -66,17 +67,18 @@ const Notebook = ({ id, data, setNotebook }: Props) => {
         <Menu>
           <Menu.Button className="outline-none">
             {' '}
-            <CgMoreAlt className="mr-1 h-5 outline-none w-5 rounded text-zinc-600 transition delay-200 ease-in-out hover:bg-zinc-200" />
+            <CgMoreAlt className="mr-1 h-5 w-5 rounded text-zinc-600 outline-none transition delay-200 ease-in-out hover:bg-zinc-200" />
           </Menu.Button>
-          <Menu.Items className="absolute outline-none m-5 flex w-full flex-col rounded-md border bg-white p-2 text-left text-slate-800 shadow-sm">
+          <Menu.Items className="absolute m-5 flex w-full flex-col rounded-md border bg-white p-2 text-left text-slate-800 shadow-sm outline-none">
             <Menu.Item>
               {({ active }) => (
                 <button
                   className={`${
-                    active && 'bg-zinc-100 transiton duration-200 ease-in-out'
-                  } rounded-md p-1.5 inline-flex items-center gap-2`}
+                    active && 'transiton bg-zinc-100 duration-200 ease-in-out'
+                  } inline-flex items-center gap-2 rounded-md p-1.5`}
+                  onClick={() => removeNotebook()}
                 >
-                  <HiOutlineTrash className="h-5 w-5 rounded-full texttransition delay-200 ease-in-out text-red-500" />
+                  <HiOutlineTrash className="transition h-5 w-5 text-red-500 delay-200 ease-in-out" />
                   <span>Delete</span>
                 </button>
               )}
@@ -84,13 +86,13 @@ const Notebook = ({ id, data, setNotebook }: Props) => {
             <Menu.Item>
               {({ active }) => (
                 <button
-                className={`${
-                  active && 'bg-zinc-100 transiton duration-200 ease-in-out'
-                } rounded-md p-1.5 inline-flex items-center gap-2`}
-              >
-                <HiOutlinePencil className="h-5 w-5 rounded-full texttransition delay-200 ease-in-out text-red-500" />
-                <span>Rename</span>
-              </button>
+                  className={`${
+                    active && 'transiton bg-zinc-100 duration-200 ease-in-out'
+                  } inline-flex items-center gap-2 rounded-md p-1.5`}
+                >
+                  <PencilIcon className="transition h-5 w-5 text-amber-500 delay-200 ease-in-out" />
+                  <span>Rename</span>
+                </button>
               )}
             </Menu.Item>
           </Menu.Items>
