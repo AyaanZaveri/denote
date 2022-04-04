@@ -4,7 +4,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import NotebookIndex from '..'
 import { db } from '../../../../firebase'
 import TextareaAutosize from 'react-textarea-autosize'
+import dynamic from 'next/dynamic'
 import ReactMarkdown from 'react-markdown'
+import { EditorState } from "draft-js";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const NoteID = () => {
   const router = useRouter()
@@ -59,10 +62,10 @@ const NoteID = () => {
           onChange={(e) => {
             setNoteData({
               ...noteData,
-              title: e.target.value,
+              title: e.target.value == '' ? "Untitled Notebook" : e.target.value,
             })
           }}
-          className="inline-flex items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-gray-800 outline-none hover:bg-gray-50 focus:bg-gray-100"
+          className="inline-flex items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-zinc-800 outline-none hover:bg-zinc-50 focus:bg-zinc-100"
         />
         <TextareaAutosize
           defaultValue={markdown}
@@ -74,9 +77,9 @@ const NoteID = () => {
           }}
           minRows={10}
           placeholder="What's on your mind?"
-          className="w-full resize-none overflow-hidden rounded-lg p-1.5 text-gray-800 outline-none"
+          className="w-full resize-none overflow-hidden rounded-lg p-1.5 text-zinc-800 outline-none"
         />
-        <div className="prose">
+        <div className="prose absolute">
           <ReactMarkdown>{markdown}</ReactMarkdown>
         </div>
       </div>

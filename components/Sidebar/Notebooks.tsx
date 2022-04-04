@@ -60,14 +60,14 @@ const Notebooks = () => {
 
   return (
     <div>
-      <span className="mt-5 inline-flex items-center gap-1 text-left text-xl font-bold text-gray-800">
+      <span className="mt-5 inline-flex items-center gap-1 text-left text-xl font-bold text-zinc-800">
         Notebooks{' '}
         {loading ? (
-          <CgSpinner className="h-5 w-5 animate-spin text-gray-800" />
+          <CgSpinner className="h-5 w-5 animate-spin text-zinc-800" />
         ) : (
           <HiOutlinePlusCircle
             onClick={addNotebook}
-            className="h-5 w-5 text-gray-500 transition delay-200 ease-in-out hover:rotate-90 hover:cursor-pointer hover:text-blue-500"
+            className="h-5 w-5 text-zinc-500 transition delay-200 ease-in-out hover:rotate-90 hover:cursor-pointer hover:text-blue-500"
           />
         )}
       </span>

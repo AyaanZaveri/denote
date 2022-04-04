@@ -16,21 +16,21 @@ body {
     @apply w-[0.2rem]
   }
   .scrollbar::-webkit-scrollbar-thumb {
-    @apply rounded-lg bg-gray-200;
+    @apply rounded-lg bg-zinc-200;
   }
   .scrollbar::-webkit-scrollbar-thumb:active {
-    @apply bg-gray-300;
+    @apply bg-zinc-300;
   }
   .scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-300;
+    @apply bg-zinc-300;
   }
 
   /* Scroll track styles (Background) */
   .scrollbar::-webkit-scrollbar-track {
-    @apply bg-gray-100;
+    @apply bg-zinc-100;
   }
   .scrollbar::-webkit-scrollbar-track:hover,
   .scrollbar::-webkit-scrollbar-track:active {
-    @apply bg-gray-100;
+    @apply bg-zinc-100;
   }
 }

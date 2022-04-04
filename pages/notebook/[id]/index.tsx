@@ -142,7 +142,7 @@ const NotebookIndex = ({ notes }: ssProps) => {
         <Sidebar name={user?.displayName!} photoURL={user?.photoURL!} />
       </div>
       <div className="scrollbar fixed top-0 bottom-0 ml-[17rem] h-full w-80 overflow-y-auto p-5 pb-8">
-        <div className="inline-flex w-full items-center justify-between pt-1 text-3xl font-bold text-gray-800">
+        <div className="inline-flex w-full items-center justify-between pt-1 text-3xl font-bold text-zinc-800">
           <input
             defaultValue={notebookInfo?.title}
             onChange={(e) => {
@@ -151,16 +151,16 @@ const NotebookIndex = ({ notes }: ssProps) => {
                 title: e.target.value === '' ? 'Untitled Notebook' : e.target.value,
               })
             }}
-            className="inline-flex w-9/12 resize-none items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-gray-800 outline-none hover:bg-gray-50 focus:bg-gray-100"
+            className="inline-flex w-9/12 resize-none items-center justify-between rounded-lg p-1.5 text-3xl font-bold text-zinc-800 outline-none hover:bg-zinc-50 focus:bg-zinc-100"
           />
           <div className="inline-flex gap-1">
             <HiOutlineTrash
               onClick={removeNotebook}
-              className="h-6 w-6 text-gray-500 transition delay-200 ease-in-out hover:scale-110 hover:cursor-pointer hover:text-blue-500"
+              className="h-6 w-6 text-zinc-500 transition delay-200 ease-in-out hover:scale-110 hover:cursor-pointer hover:text-blue-500"
             />
             <HiOutlinePlusCircle
               onClick={addADoc}
-              className="h-6 w-6 text-gray-500 transition delay-200 ease-in-out hover:rotate-90 hover:cursor-pointer hover:text-blue-500"
+              className="h-6 w-6 text-zinc-500 transition delay-200 ease-in-out hover:rotate-90 hover:cursor-pointer hover:text-blue-500"
             />
           </div>
         </div>
@@ -168,11 +168,11 @@ const NotebookIndex = ({ notes }: ssProps) => {
         <div className="mt-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-2">
-              <HiOutlineSearchCircle className="h-6 w-6 text-gray-500 transition delay-200 ease-in-out hover:text-blue-500" />
+              <HiOutlineSearchCircle className="h-6 w-6 text-zinc-500 transition delay-200 ease-in-out hover:text-blue-500" />
             </div>
             <input
               type="text"
-              className="w-full rounded-lg bg-gray-50 px-2 py-2 pl-10 text-gray-800 outline-none transition delay-200 ease-in-out hover:bg-gray-100 focus:bg-gray-100"
+              className="w-full rounded-lg bg-zinc-50 px-2 py-2 pl-10 text-zinc-800 outline-none transition delay-200 ease-in-out hover:bg-zinc-100 focus:bg-zinc-100"
               placeholder="Search..."
               onChange={(e) => setSearch(e.target.value)}
             />
