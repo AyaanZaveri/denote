@@ -8,6 +8,7 @@ import { Picker } from 'emoji-mart'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { Menu } from '@headlessui/react'
+import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi'
 
 interface Props {
   id: string
@@ -61,35 +62,36 @@ const Notebook = ({ id, data, setNotebook }: Props) => {
           ) : null}
         </div>
       </div>
-      <div className='flex items-center'>
+      <div className="flex items-start outline-none">
         <Menu>
-          <Menu.Button>
+          <Menu.Button className="outline-none">
             {' '}
-            <CgMoreAlt className="mr-1 h-5 w-5 rounded text-zinc-600 transition delay-200 ease-in-out hover:bg-zinc-200" />
+            <CgMoreAlt className="mr-1 h-5 outline-none w-5 rounded text-zinc-600 transition delay-200 ease-in-out hover:bg-zinc-200" />
           </Menu.Button>
-          <Menu.Items className="absolute text-left w-full flex flex-col gap-3">
+          <Menu.Items className="absolute outline-none m-5 flex w-full flex-col rounded-md border bg-white p-2 text-left text-slate-800 shadow-sm">
             <Menu.Item>
               {({ active }) => (
-                <a
-                  className={`${active && 'bg-blue-500'}`}
-                  href="/account-settings"
+                <button
+                  className={`${
+                    active && 'bg-zinc-100 transiton duration-200 ease-in-out'
+                  } rounded-md p-1.5 inline-flex items-center gap-2`}
                 >
-                  Account settings
-                </a>
+                  <HiOutlineTrash className="h-5 w-5 rounded-full texttransition delay-200 ease-in-out text-red-500" />
+                  <span>Delete</span>
+                </button>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <a
-                  className={`${active && 'bg-blue-500'}`}
-                  href="/account-settings"
-                >
-                  Documentation
-                </a>
+                <button
+                className={`${
+                  active && 'bg-zinc-100 transiton duration-200 ease-in-out'
+                } rounded-md p-1.5 inline-flex items-center gap-2`}
+              >
+                <HiOutlinePencil className="h-5 w-5 rounded-full texttransition delay-200 ease-in-out text-red-500" />
+                <span>Rename</span>
+              </button>
               )}
-            </Menu.Item>
-            <Menu.Item disabled>
-              <span className="opacity-75">Invite a friend (coming soon!)</span>
             </Menu.Item>
           </Menu.Items>
         </Menu>
