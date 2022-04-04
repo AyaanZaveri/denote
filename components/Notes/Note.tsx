@@ -48,13 +48,13 @@ const Note = ({ id, timestamp, title, tag, markdown, notebookID }: Props) => {
   return (
     <div>
       <div
-        className={`relative cursor-pointer rounded-lg bg-zinc-50 p-3 transition delay-200 ease-in-out ${
+        className={`relative cursor-pointer rounded-lg bg-zinc-50 p-3 transition duration-500 ease-in-out ${
           id == queryID ? 'bg-zinc-200' : 'hover:bg-zinc-100'
         }`}
       >
         <div className="flex flex-col">
           <a href={`/notebook/${notebookID}/note/${id}`}>
-            <span className="font-semibold break-words text-zinc-800 transition delay-200 ease-in-out hover:underline">
+            <span className="font-semibold break-words text-zinc-800 transition duration-500 ease-in-out hover:underline">
               {title}
             </span>
           </a>
@@ -66,7 +66,7 @@ const Note = ({ id, timestamp, title, tag, markdown, notebookID }: Props) => {
           onClick={removeDoc}
           className="absolute top-0 right-0 m-1.5 text-[12px]"
         >
-          <HiOutlineTrash className="h-4 w-4 rounded-full text-zinc-500 transition delay-200 ease-in-out hover:text-blue-500" />
+          <HiOutlineTrash className="h-4 w-4 rounded-full text-zinc-500 transition duration-500 ease-in-out hover:text-blue-500" />
         </button>
       </div>
     </div>
