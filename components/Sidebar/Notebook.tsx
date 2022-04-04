@@ -76,7 +76,7 @@ const Notebook = ({ id, data, setNotebook }: Props) => {
                   className={`${
                     active && 'transiton bg-zinc-100 duration-200 ease-in-out'
                   } inline-flex items-center gap-2 rounded-md p-1.5`}
-                  onClick={() => removeNotebook()}
+                  onClick={removeNotebook}
                 >
                   <HiOutlineTrash className="transition h-5 w-5 text-red-500 delay-200 ease-in-out" />
                   <span>Delete</span>

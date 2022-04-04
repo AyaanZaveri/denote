@@ -54,7 +54,7 @@ const Note = ({ id, timestamp, title, tag, markdown, notebookID }: Props) => {
       >
         <div className="flex flex-col">
           <a href={`/notebook/${notebookID}/note/${id}`}>
-            <span className="font-semibold text-zinc-800 transition delay-200 ease-in-out hover:underline">
+            <span className="font-semibold break-words text-zinc-800 transition delay-200 ease-in-out hover:underline">
               {title}
             </span>
           </a>
